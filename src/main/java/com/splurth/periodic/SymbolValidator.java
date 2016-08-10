@@ -22,8 +22,4 @@ final class SymbolValidator {
         return char1Index != -1 && char2Index != -1 && char2Index > char1Index;
     };
 
-    boolean validator(String word, String symbol) {
-        return validSymbolOrderAndNumberOfOccurrences.test(word, symbol);
-    }
-
 }

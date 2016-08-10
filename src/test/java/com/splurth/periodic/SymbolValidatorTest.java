@@ -109,70 +109,63 @@ public class SymbolValidatorTest {
                     symbolValidator.validSymbolOrderAndNumberOfOccurrences.test("details", "aa"));
     }
 
-
-    ///// putting them all together by testing the predicate chain
-    @Test
-    public void validateDuplicateCharacterSymbolOnceInWord() {
-        assertFalse("Character occurring once in word cannot be duplicated in symbol", symbolValidator.validator("columbia", "cc"));
-    }
-
     @Test
     public void validateDuplicateCharacterSymbolTwiceInWord() {
-        assertTrue("Duplicate character repeated in word is a valid symbol", symbolValidator.validator("repeat", "ee"));
+        assertTrue("Duplicate character repeated in word is a valid symbol", symbolValidator.validSymbolOrderAndNumberOfOccurrences.test("repeat", "ee"));
     }
 
     @Test
     public void validateNumericWordAgainstCasedSymbol() {
-        assertFalse("Word with numeric should have failed", symbolValidator.validator("abc1def", "ab"));
+        assertFalse("Word with numeric should have failed", symbolValidator.validSymbolOrderAndNumberOfOccurrences.test("abc1def", "ab"));
     }
 
     @Test
     public void validateNumericSymbolWithCasedWord() {
-        assertFalse("Symbol with numeric should have failed", symbolValidator.validator("abcdef", "a1"));
+        assertFalse("Symbol with numeric should have failed", symbolValidator.validSymbolOrderAndNumberOfOccurrences.test("abcdef", "a1"));
     }
 
     @Test
     public void validateCasedWordWithUncasedSymbol() {
-        assertTrue("Uncased symbol should have matched cased word", symbolValidator.validator("AbCdEfG", "bg"));
+        assertTrue("Uncased symbol should have matched cased word", symbolValidator.validSymbolOrderAndNumberOfOccurrences.test("AbCdEfG", "bg"));
     }
 
     @Test
     public void validateCasedSymbolWithUncasedWord() {
-        assertTrue("Cased symbol should have matched uncased word", symbolValidator.validator("abcdefg", "CF"));
+        assertTrue("Cased symbol should have matched uncased word", symbolValidator.validSymbolOrderAndNumberOfOccurrences.test("abcdefg", "CF"));
     }
 
     @Test
     public void validateUncasedWordWithUncasedSymbol() {
-        assertTrue("Uncased word and uncased symbol should have matched", symbolValidator.validator("abcdefg", "af"));
+        assertTrue("Uncased word and uncased symbol should have matched", symbolValidator.validSymbolOrderAndNumberOfOccurrences.test("abcdefg", "af"));
     }
 
     @Test
     public void validateCasedWordWithCasedSymbol() {
-        assertTrue("Cased word and cased symbol should have matched", symbolValidator.validator("AbCdEfG", "bE"));
+        assertTrue("Cased word and cased symbol should have matched", symbolValidator.validSymbolOrderAndNumberOfOccurrences.test("AbCdEfG", "bE"));
     }
 
     @Test
     public void validateSpacedWordWithCasedSymbol() {
-        assertFalse("Word with space is not valid", symbolValidator.validator("clinton trump", "Bm"));
+        assertFalse("Word with space is not valid", symbolValidator.validSymbolOrderAndNumberOfOccurrences.test("clinton trump", "Bm"));
     }
 
     @Test
     public void validateLeadingSpaceSymbolWithCasedWord() {
-        assertFalse("Leading space symbol is invalid", symbolValidator.validator("ObamaCare", " O"));
+        assertFalse("Leading space symbol is invalid", symbolValidator.validSymbolOrderAndNumberOfOccurrences.test("ObamaCare", " O"));
     }
 
     @Test
     public void validateTrailingSpaceSymbolWithCasedWord() {
-        assertFalse("Trailing space symbol is invalid", symbolValidator.validator("Freedom", "F "));
+        assertFalse("Trailing space symbol is invalid", symbolValidator.validSymbolOrderAndNumberOfOccurrences.test("Freedom", "F "));
     }
 
     @Test
     public void validateCasedWordWithSingleCharSymbol() {
-        assertFalse("Single char symbol is invalid", symbolValidator.validator("Pokemon", "k"));
+        assertFalse("Single char symbol is invalid", symbolValidator.validSymbolOrderAndNumberOfOccurrences.test("Pokemon", "k"));
     }
 
     @Test
     public void validateWrongSymbolOrder() {
-        assertFalse("Incorrect order of symbol should fail", symbolValidator.validator("PokemonGo", "GP"));
+        assertFalse("Incorrect order of symbol should fail", symbolValidator.validSymbolOrderAndNumberOfOccurrences.test("PokemonGo", "GP"));
     }
 }
