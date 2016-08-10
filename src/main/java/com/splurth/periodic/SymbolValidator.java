@@ -10,7 +10,7 @@ final class SymbolValidator {
     Predicate<String> validSymbolFormat = symbol -> Pattern.compile("^[a-z]{2}", Pattern.CASE_INSENSITIVE).matcher(symbol).matches();
     BiPredicate<String, String> validSymbolOrderAndNumberOfOccurrences = (word, symbol) -> {
 
-        if (!alphaOnly.test(word) || ! validSymbolFormat.test(symbol)) {
+        if (!alphaOnly.test(word) || !validSymbolFormat.test(symbol)) {
             return false;
         }
 
